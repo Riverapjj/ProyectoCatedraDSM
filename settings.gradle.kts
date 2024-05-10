@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ProyectoCatedraDSM"
+rootProject.name = "RP200198_ME180102_MH180095"
 include(":app")
  
