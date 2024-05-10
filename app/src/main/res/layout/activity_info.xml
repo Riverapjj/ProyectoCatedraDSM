@@ -141,4 +141,51 @@
                 app:layout_constraintStart_toEndOf="@id/lbl_correo" />
         </TableRow>
     </TableLayout>
+
+    <ImageButton
+        android:id="@+id/btn_cancelar"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_round_corner"
+        app:layout_constraintBottom_toTopOf="@id/lbl_cancelar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_cancelar"
+        app:tint="@color/black" />
+
+    <TextView
+        android:id="@+id/lbl_cancelar"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="36dp"
+        android:text="Cancelar"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_guardar"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_round_corner"
+        app:layout_constraintBottom_toTopOf="@id/lbl_guardar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_guardar"
+        app:tint="@color/black" />
+
+    <TextView
+        android:id="@+id/lbl_guardar"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginBottom="36dp"
+        android:text="Guardar"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
