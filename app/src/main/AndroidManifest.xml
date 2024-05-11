@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".InfoActivity"
+            android:label="Info Activity" />
+
+        <activity
+            android:name=".ContactoActivity"
+            android:label="Contacto Activity" />
     </application>
 
 </manifest>

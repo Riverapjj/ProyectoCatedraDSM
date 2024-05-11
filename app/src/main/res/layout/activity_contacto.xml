@@ -148,6 +148,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginBottom="36dp"
         android:text="Eliminar"
+        android:textColor="@color/gray"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -172,6 +173,7 @@
         android:layout_marginBottom="36dp"
         android:text="Modificar"
         android:textAlignment="center"
+        android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
