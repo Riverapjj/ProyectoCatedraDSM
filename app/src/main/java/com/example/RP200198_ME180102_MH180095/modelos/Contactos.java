@@ -8,12 +8,15 @@ public class Contactos {
     private String numero;
     private String correo;
 
-    public Contactos() {
-
-    }
-
     public Contactos(int id, String nombre, String apellido, String numero, String correo) {
         this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.numero = numero;
+        this.correo = correo;
+    }
+
+    public Contactos(String nombre, String apellido, String numero, String correo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.numero = numero;

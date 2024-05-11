@@ -24,56 +24,80 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "agendadb.db";
-    private static final int DATABASE_VERSION = 1;
+    public static final String DBNOMBRE = "agendadb.db";
+    private Context contexto;
+    public static String DBUBICACION = null;
 
-    private Context context;
+    private SQLiteDatabase contactosDB;
 
-    public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
+    public DBHelper(Context contexto) {
+        super(contexto, DBNOMBRE, null, 1);
+        this.DBUBICACION  = "/data/data/" + contexto.getPackageName() + "/databases/";
+        this.contexto = contexto;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Sentencia SQL para crear la tabla "Contactos"
-        //String CREATE_CONTACTS_TABLE = "CREATE TABLE Contactos (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, nombre TEXT, apellido TEXT, numero TEXT, correo TEXT)";
-        // Ejecuta la sentencia SQL
-        //db.execSQL(CREATE_CONTACTS_TABLE);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Aquí puedes ejecutar sentencias SQL para actualizar la base de datos
+
     }
 
-    public void copyDatabaseFromAssets() throws IOException {
-        // Código para copiar la base de datos desde el directorio de activos
-        // Ruta de destino en el almacenamiento interno
-        String outFileName = context.getDatabasePath(DATABASE_NAME).getPath();
-
-        // Si la base de datos ya existe, no hacemos nada
-        if (new File(outFileName).exists()) {
+    public void openDatabase() {
+        String dbPath = contexto.getDatabasePath(DBNOMBRE).getPath();
+        if(contactosDB != null && contactosDB.isOpen()) {
             return;
         }
+        contactosDB = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
+    }
 
-        // Abre el archivo en los activos como un stream de entrada
-        InputStream inputStream = context.getAssets().open(DATABASE_NAME);
-
-        // Abre el archivo de destino como un stream de salida
-        OutputStream outputStream = new FileOutputStream(outFileName);
-
-        // Transfiere los datos desde el stream de entrada al stream de salida
-        byte[] buffer = new byte[1024];
-        int length;
-        while ((length = inputStream.read(buffer)) > 0) {
-            outputStream.write(buffer, 0, length);
+    public void closeDatabase() {
+        if(contactosDB!=null) {
+            contactosDB.close();
         }
+    }
 
-        // Cierra los streams
-        outputStream.flush();
-        outputStream.close();
-        inputStream.close();
+    public List<Contactos> obtener_contactos() {
+        Contactos contactos = null;
+        List<Contactos> lista_contactos = new ArrayList<>();
+        openDatabase();
+        Cursor cursor = contactosDB.rawQuery("SELECT * FROM Contactos", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            contactos = new Contactos(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                    cursor.getString(3), cursor.getString(4));
+            lista_contactos.add(contactos);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        closeDatabase();
+        return lista_contactos;
+    }
+
+    public Contactos obtener_contacto(int id) {
+        Contactos contacto = null;
+        List<Contactos> lista_contactos = new ArrayList<>();
+        openDatabase();
+        Cursor cursor = contactosDB.rawQuery("SELECT * FROM Contactos WHERE id=?", new String[]{String.valueOf(id)});
+
+        if (cursor.moveToFirst()) {
+            // Creamos un objeto Contactos utilizando los datos del cursor
+            contacto = new Contactos(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                    cursor.getString(3), cursor.getString(4));
+        }
+        /*cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Contactos = new Contactos(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                    cursor.getString(3), cursor.getString(4));
+            lista_contactos.add(Contactos);
+            cursor.moveToNext();
+        }*/
+        cursor.close();
+        closeDatabase();
+        return contacto;
     }
 
     // Método para agregar un nuevo registro
@@ -88,31 +112,6 @@ public class DBHelper extends SQLiteOpenHelper {
         // Inserta el registro en la tabla
         db.insert("Contactos", null, contacto);
         db.close();
-    }
-
-    // Método para leer todos los registros
-    public List<Contactos> obtener_contactos() {
-        List<Contactos> lista_contactos = new ArrayList<>();
-        String selectQuery = "SELECT * FROM Contactos";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        Log.e("DBHELPER", db.rawQuery(selectQuery, null).toString());
-        // Itera a través del cursor y agrega los registros a la lista
-        if (cursor.moveToFirst()) {
-            do {
-                Contactos contacto = new Contactos();
-                // Lee los valores del cursor y configura el objeto Registro
-                contacto.setNombre(cursor.getString(1));
-                contacto.setApellido(cursor.getString(2));
-                contacto.setNumero(cursor.getString(3));
-                contacto.setCorreo(cursor.getString(4));
-                // Agrega el registro a la lista
-                lista_contactos.add(contacto);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return lista_contactos;
     }
 
     // Método para editar un registro existente
