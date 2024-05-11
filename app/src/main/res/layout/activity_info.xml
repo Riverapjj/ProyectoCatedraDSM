@@ -162,6 +162,7 @@
         android:layout_marginBottom="36dp"
         android:text="Cancelar"
         android:textAlignment="center"
+        android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -185,6 +186,7 @@
         android:layout_marginBottom="36dp"
         android:text="Guardar"
         android:textAlignment="center"
+        android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
