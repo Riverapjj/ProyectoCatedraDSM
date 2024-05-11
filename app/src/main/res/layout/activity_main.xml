@@ -37,11 +37,12 @@
         app:tint="@color/white"
         app:rippleColor="@color/rippleColor"/>
 
-    <LinearLayout
+    <TableLayout
+        android:id="@+id/lista_contactos"
         android:layout_width="409dp"
         android:layout_height="657dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
