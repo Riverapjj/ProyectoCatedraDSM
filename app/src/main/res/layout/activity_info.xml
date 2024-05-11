@@ -30,22 +30,25 @@
                 android:text="Nombre:"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:layout_marginEnd="1dp"
                 app:layout_constraintBottom_toTopOf="@id/lbl_apellido"
                 app:layout_constraintEnd_toStartOf="@id/txt_nombre"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
+            <EditText
                 android:id="@+id/txt_nombre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="Josue"
+                android:ems="10"
+                android:inputType="text"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:hint="Nombre"
+                android:padding="15dp"
+                android:backgroundTint="@color/gray"
                 app:layout_constraintBottom_toTopOf="@id/txt_apellido"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toEndOf="@id/lbl_nombre" />
+
         </TableRow>
 
         <TableRow
@@ -66,16 +69,19 @@
                 app:layout_constraintEnd_toStartOf="@id/txt_apellido"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
+            <EditText
                 android:id="@+id/txt_apellido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="Rivera"
+                android:ems="10"
+                android:inputType="text"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:hint="Apellido"
+                android:padding="15dp"
+                android:backgroundTint="@color/gray"
                 app:layout_constraintBottom_toTopOf="@id/txt_num"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toEndOf="@id/lbl_apellido" />
         </TableRow>
 
@@ -97,16 +103,19 @@
                 app:layout_constraintEnd_toStartOf="@id/txt_num"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
+            <EditText
                 android:id="@+id/txt_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="+503 79254721"
+                android:ems="10"
+                android:inputType="phone"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:hint="Numero"
+                android:padding="15dp"
+                android:backgroundTint="@color/gray"
                 app:layout_constraintBottom_toTopOf="@id/txt_correo"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toEndOf="@id/lbl_num" />
         </TableRow>
 
@@ -128,15 +137,18 @@
                 app:layout_constraintEnd_toStartOf="@id/txt_correo"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
+            <EditText
                 android:id="@+id/txt_correo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="riverapj99@gmail.com"
+                android:ems="10"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:hint="Correo"
+                android:padding="15dp"
+                android:backgroundTint="@color/gray"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/lbl_correo" />
         </TableRow>

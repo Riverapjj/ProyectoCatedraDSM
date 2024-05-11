@@ -7,7 +7,7 @@
     android:background="@color/black">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/btn_atras"
         android:layout_width="66dp"
         android:layout_height="52dp"
         android:clickable="true"
@@ -15,14 +15,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_atras"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        app:rippleColor="@color/gray"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="288dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp"
         android:background="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,13 +36,13 @@
             android:layout_width="164dp"
             android:layout_height="144dp"
             android:background="@drawable/img_round_corner"
-            app:tint="@color/gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.277"
-            app:srcCompat="@drawable/ic_usuario" />
+            app:srcCompat="@drawable/ic_usuario"
+            app:tint="@color/gray" />
 
         <TextView
             android:id="@+id/nombre_contacto"
@@ -57,7 +58,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TableLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
