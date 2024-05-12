@@ -6,6 +6,30 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
+    <ImageButton
+        android:id="@+id/btn_Whatsapp"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_round_corner"
+        app:layout_constraintBottom_toTopOf="@id/lbl_Whatsapp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_what"
+        app:tint="@color/black" />
+
+    <TextView
+        android:id="@+id/lbl_Whatsapp"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="324dp"
+        android:layout_marginBottom="36dp"
+        android:text="Whatsapp"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_atras"
         android:layout_width="66dp"
@@ -134,7 +158,7 @@
         android:id="@+id/btn_eliminar"
         android:layout_width="39dp"
         android:layout_height="39dp"
-        android:layout_marginStart="124dp"
+        android:layout_marginStart="52dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_round_corner"
         app:layout_constraintBottom_toTopOf="@id/lbl_eliminar"
@@ -143,14 +167,14 @@
         app:tint="@color/black" />
 
     <TextView
-        android:id="@+id/lbl_eliminar"
+        android:id="@+id/lbl_modificar"
         android:layout_width="70dp"
         android:layout_height="24dp"
-        android:layout_marginStart="108dp"
+        android:layout_marginStart="188dp"
         android:layout_marginBottom="36dp"
-        android:text="Eliminar"
-        android:textColor="@color/gray"
+        android:text="Modificar"
         android:textAlignment="center"
+        android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -158,7 +182,7 @@
         android:id="@+id/btn_editar"
         android:layout_width="39dp"
         android:layout_height="39dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="164dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_round_corner"
         app:layout_constraintBottom_toTopOf="@id/lbl_modificar"
@@ -167,12 +191,12 @@
         app:tint="@color/black" />
 
     <TextView
-        android:id="@+id/lbl_modificar"
+        android:id="@+id/lbl_eliminar"
         android:layout_width="70dp"
         android:layout_height="24dp"
-        android:layout_marginStart="260dp"
+        android:layout_marginStart="36dp"
         android:layout_marginBottom="36dp"
-        android:text="Modificar"
+        android:text="Eliminar"
         android:textAlignment="center"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
