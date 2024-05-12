@@ -2,11 +2,15 @@ package com.example.RP200198_ME180102_MH180095;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.example.RP200198_ME180102_MH180095.basededatos.DBHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,6 +25,8 @@ public class ContactoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacto);
+
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
 
         btn_eliminar = (ImageButton) findViewById(R.id.btn_eliminar);
         btn_modificar = (ImageButton) findViewById(R.id.btn_editar);
@@ -47,9 +53,22 @@ public class ContactoActivity extends AppCompatActivity {
         btn_eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ContactoActivity.this, MainActivity.class);
-                dbHelper.eliminar_contacto(lbl_nombre.getId());
-                startActivity(intent);
+
+                dialogo1.setTitle("Importante");
+                dialogo1.setMessage("¿ Desea eliminar este contacto ?");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        aceptar();
+                    }
+                });
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        cancelar();
+                    }
+                });
+                dialogo1.show();
+
             }
         });
 
@@ -66,4 +85,21 @@ public class ContactoActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+    public void aceptar() {
+        Intent intent = new Intent(ContactoActivity.this, MainActivity.class);
+        dbHelper.eliminar_contacto(lbl_nombre.getId());
+        startActivity(intent);
+
+        Toast t=Toast.makeText(this,"Contacto eliminado con exito", Toast.LENGTH_SHORT);
+        t.show();
+    }
+
+    public void cancelar() {
+        //finish();
+    }
+
 }
