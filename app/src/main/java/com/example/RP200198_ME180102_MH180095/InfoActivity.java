@@ -50,7 +50,7 @@ public class InfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(InfoActivity.this, MainActivity.class);
                 startActivity(intent);
-            }g
+            }
         });
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
@@ -58,20 +58,34 @@ public class InfoActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (intentIsEmpty(intent)) {
-
-                    if (WhatsAppHelper.verificarNumeroWhatsApp(InfoActivity.this, "+503".concat(txt_num.getText().toString()))) {
+                    try {
+                        if (WhatsAppHelper.verificarNumeroWhatsApp(InfoActivity.this, "+503".concat(txt_num.getText().toString()))) {
                         dbHelper.agregar_contacto(new Contactos(txt_nombre.getText().toString().trim(), txt_apellido.getText().toString().trim(),
                                 txt_num.getText().toString().trim(), txt_correo.getText().toString().trim(), "1"));
-                    } else {
+                        } else {
                         dbHelper.agregar_contacto(new Contactos(txt_nombre.getText().toString().trim(), txt_apellido.getText().toString().trim(),
                                 txt_num.getText().toString().trim(), txt_correo.getText().toString().trim(), "0"));
+                        }
+
+                        Toast.makeText(getApplicationContext(), "Contacto agregado a la agenda", Toast.LENGTH_SHORT).show();
                     }
-
-
+                    catch (Exception e)
+                    {
+                        Toast.makeText(getApplicationContext(), "Error al agregar contacto", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    dbHelper.editar_contacto(new Contactos(txt_nombre.getText().toString().trim(), txt_apellido.getText().toString().trim(),
-                            txt_num.getText().toString().trim(), txt_correo.getText().toString().trim()), txt_nombre.getId());
+                    try {
+                        dbHelper.editar_contacto(new Contactos(txt_nombre.getText().toString().trim(), txt_apellido.getText().toString().trim(),
+                                txt_num.getText().toString().trim(), txt_correo.getText().toString().trim(), intent.getStringExtra("wha")), txt_nombre.getId());
+
+                        Toast.makeText(getApplicationContext(), "Contacto actualizado con exito", Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), "Error al actualizar contacto", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
 
                 Intent intent = new Intent(InfoActivity.this, MainActivity.class);
                 startActivity(intent);

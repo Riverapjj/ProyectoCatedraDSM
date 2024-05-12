@@ -60,6 +60,7 @@ public class ListaContactosAdaptador extends BaseAdapter {
                 intent.putExtra("apellido", contacto.getApellido());
                 intent.putExtra("numero", contacto.getNumero());
                 intent.putExtra("correo", contacto.getCorreo());
+                intent.putExtra("wha", contacto.getWha());
                 context.startActivity(intent);
             }
         });
