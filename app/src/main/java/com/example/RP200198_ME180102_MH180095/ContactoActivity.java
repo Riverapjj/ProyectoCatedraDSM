@@ -5,11 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import 	android.content.pm.PackageInfo;
+import java.net.URI;
 
 
 import com.example.RP200198_ME180102_MH180095.basededatos.DBHelper;
@@ -17,7 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ContactoActivity extends AppCompatActivity {
 
-    private ImageButton btn_eliminar, btn_modificar;
+    private ImageButton btn_eliminar, btn_modificar, btn_whatsapp;
     private TextView lbl_nombre, txt_num, txt_correo;
     private FloatingActionButton btn_atras;
     private DBHelper dbHelper;
@@ -30,6 +35,8 @@ public class ContactoActivity extends AppCompatActivity {
 
         btn_eliminar = (ImageButton) findViewById(R.id.btn_eliminar);
         btn_modificar = (ImageButton) findViewById(R.id.btn_editar);
+        btn_whatsapp = (ImageButton) findViewById(R.id.btn_Whatsapp);
+
         lbl_nombre = (TextView) findViewById(R.id.nombre_contacto);
         txt_num = (TextView) findViewById(R.id.txt_num);
         txt_correo = (TextView) findViewById(R.id.txt_correo);
@@ -75,6 +82,7 @@ public class ContactoActivity extends AppCompatActivity {
         btn_modificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intentModificar = new Intent(ContactoActivity.this, InfoActivity.class);
                 intentModificar.putExtra("id", lbl_nombre.getId());
                 intentModificar.putExtra("nombre", intent.getStringExtra("nombre"));
@@ -84,9 +92,32 @@ public class ContactoActivity extends AppCompatActivity {
                 startActivity(intentModificar);
             }
         });
+
+
+        btn_whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enviaMensajeWhatsApp(intent.getStringExtra("numero"),"");
+            }
+        });
     }
 
 
+    public void enviaMensajeWhatsApp(String numero, String msj) {
+
+        try {
+            String numeroTel = numero;
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            String uri = "whatsapp://send?phone=" + numeroTel + "&text=" + msj;
+            intent.setData(Uri.parse(uri));
+            startActivity(intent);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(), "Error" + e, Toast.LENGTH_LONG)
+                .show();
+        }
+    }
 
 
     public void aceptar() {
