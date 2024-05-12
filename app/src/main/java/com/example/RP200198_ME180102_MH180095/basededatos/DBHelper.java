@@ -109,6 +109,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contacto.put("apellido", contactos.getApellido());
         contacto.put("numero", contactos.getNumero());
         contacto.put("correo", contactos.getCorreo());
+        contacto.put("wha", contactos.getWha());
         // Inserta el registro en la tabla
         db.insert("Contactos", null, contacto);
         db.close();

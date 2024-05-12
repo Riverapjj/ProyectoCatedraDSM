@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.RP200198_ME180102_MH180095.basededatos.DBHelper;
+import com.example.RP200198_ME180102_MH180095.helpers.WhatsAppHelper;
 import com.example.RP200198_ME180102_MH180095.modelos.Contactos;
 
 public class InfoActivity extends AppCompatActivity {
@@ -18,13 +19,14 @@ public class InfoActivity extends AppCompatActivity {
     private EditText txt_nombre, txt_apellido, txt_num, txt_correo;
     private ImageButton btn_cancelar, btn_guardar;
     private DBHelper dbHelper;
+    //private WhatsAppHelper whatsAppHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
-        Intent intent = getIntent();
 
+        Intent intent = getIntent();
         txt_nombre = (EditText) findViewById(R.id.txt_nombre);
         txt_nombre.setId(intent.getIntExtra("id",-1));
 
@@ -37,6 +39,7 @@ public class InfoActivity extends AppCompatActivity {
 
         if (!intentIsEmpty(intent)) {
             txt_nombre.setText(intent.getStringExtra("nombre"));
+            txt_nombre.setId(intent.getIntExtra("id", -1));
             txt_apellido.setText(intent.getStringExtra("apellido"));
             txt_num.setText(intent.getStringExtra("numero"));
             txt_correo.setText(intent.getStringExtra("correo"));
@@ -47,7 +50,7 @@ public class InfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(InfoActivity.this, MainActivity.class);
                 startActivity(intent);
-            }
+            }g
         });
 
         btn_guardar.setOnClickListener(new View.OnClickListener() {
@@ -55,27 +58,19 @@ public class InfoActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (intentIsEmpty(intent)) {
-                    try {
+
+                    if (WhatsAppHelper.verificarNumeroWhatsApp(InfoActivity.this, "+503".concat(txt_num.getText().toString()))) {
                         dbHelper.agregar_contacto(new Contactos(txt_nombre.getText().toString().trim(), txt_apellido.getText().toString().trim(),
-                                txt_num.getText().toString().trim(), txt_correo.getText().toString().trim()));
+                                txt_num.getText().toString().trim(), txt_correo.getText().toString().trim(), "1"));
+                    } else {
+                        dbHelper.agregar_contacto(new Contactos(txt_nombre.getText().toString().trim(), txt_apellido.getText().toString().trim(),
+                                txt_num.getText().toString().trim(), txt_correo.getText().toString().trim(), "0"));
+                    }
 
-                        Toast.makeText(getApplicationContext(), "Contacto agregado a la agenda", Toast.LENGTH_SHORT).show();
-                    }
-                    catch (Exception e)
-                    {
-                        Toast.makeText(getApplicationContext(), "Error al agregar contacto", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else {
-                    try {
-                        dbHelper.editar_contacto(new Contactos(txt_nombre.getText().toString().trim(), txt_apellido.getText().toString().trim(),
-                                txt_num.getText().toString().trim(), txt_correo.getText().toString().trim()), txt_nombre.getId());
 
-                        Toast.makeText(getApplicationContext(), "Contacto actualizado con exito", Toast.LENGTH_SHORT).show();
-                    }
-                    catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), "Error al actualizar contacto", Toast.LENGTH_SHORT).show();
-                    }
+                } else {
+                    dbHelper.editar_contacto(new Contactos(txt_nombre.getText().toString().trim(), txt_apellido.getText().toString().trim(),
+                            txt_num.getText().toString().trim(), txt_correo.getText().toString().trim()), txt_nombre.getId());
                 }
 
                 Intent intent = new Intent(InfoActivity.this, MainActivity.class);

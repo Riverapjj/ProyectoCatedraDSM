@@ -7,6 +7,7 @@ public class Contactos {
     private String apellido;
     private String numero;
     private String correo;
+    private String wha;
 
     public Contactos(int id, String nombre, String apellido, String numero, String correo) {
         this.id = id;
@@ -16,11 +17,12 @@ public class Contactos {
         this.correo = correo;
     }
 
-    public Contactos(String nombre, String apellido, String numero, String correo) {
+    public Contactos(String nombre, String apellido, String numero, String correo, String wha) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.numero = numero;
         this.correo = correo;
+        this.wha = wha;
     }
 
     public int getId() {
@@ -61,5 +63,13 @@ public class Contactos {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getWha() {
+        return wha;
+    }
+
+    public void setWha(String wha) {
+        this.wha = wha;
     }
 }
